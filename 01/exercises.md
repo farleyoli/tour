@@ -168,3 +168,112 @@ int main() {
 ```
 
 **Note:** You need to implement the functions, class, and namespace as per the specifications. This problem requires you to understand and demonstrate the concepts of scope and object lifetime in C++.
+
+# Problem D: Constants and Compile-Time Evaluation
+
+**Concepts Tested:**
+- `const` and `constexpr` usage
+- Immutable objects
+- Compile-time function evaluation (`constexpr` and `consteval` functions)
+
+**Problem Statement:**
+Create a program that demonstrates the usage of `const` and `constexpr` in C++, and the concept of compile-time function evaluation. You are required to perform the following tasks:
+
+1. **Constants Declaration and Usage:**
+   - Declare a `constexpr` integer `constInt` and initialize it with a compile-time constant value.
+   - Declare a `const` double `constDouble` and initialize it with the square root of a non-constant integer, illustrating runtime initialization.
+
+2. **Compile-Time Function Evaluation:**
+   - Define a `constexpr` function `constexprSquare` that computes the square of a number.
+   - Use `constexprSquare` with a compile-time constant argument and store the result in a `constexpr` variable.
+   - Attempt to use `constexprSquare` with a non-constant expression and store the result in a `const` variable, commenting on the difference in behavior.
+
+3. **`consteval` Function Demonstration:**
+   - Define a `consteval` function `constevalSquare` that computes the square of a number.
+   - Demonstrate the usage of `constevalSquare` with a compile-time constant, and comment on the behavior when used with a non-constant expression.
+
+4. **Complex `constexpr` Function:**
+   - Define a `constexpr` function `nthPower` that computes the `n`th power of a number `x` (both `x` and `n` are function arguments).
+   - Use `nthPower` with compile-time constants and with non-constant expressions, demonstrating both compile-time and runtime evaluation.
+
+**Technical Requirements:**
+- Ensure proper use of `const` and `constexpr` in variable declarations.
+- Correctly implement and use `constexpr` and `consteval` functions.
+- Demonstrate understanding of compile-time vs. runtime evaluation in the context of `constexpr` functions.
+
+**Example Usage:**
+Your program does not need to take any input. The main focus is on demonstrating the correct usage of `const`, `constexpr`, and `consteval`, and understanding their impact on compile-time and runtime behavior.
+
+```cpp
+#include <cmath>
+#include <iostream>
+
+// Constants declaration
+constexpr int constInt = 10;
+const double constDouble = std::sqrt(20);
+
+// constexpr function
+constexpr double constexprSquare(double x) {
+    return x * x;
+}
+
+// consteval function
+consteval double constevalSquare(double x) {
+    return x * x;
+}
+
+// Complex constexpr function
+constexpr double nthPower(double x, int n) {
+    // ... (your implementation here)
+}
+
+int main() {
+    // Demonstrate const and constexpr usage
+    // ...
+
+    // Demonstrate constexpr and consteval functions
+    // ...
+
+    // Demonstrate complex constexpr function
+    // ...
+
+    return 0;
+}
+```
+
+**Note:** You need to implement the functions and demonstrate the use of `const`, `constexpr`, and `consteval` as per the specifications. This problem requires you to understand the nuances of constant expressions, compile-time function evaluation, and the role of immutability in program design.
+
+# Problem E: String Analysis with CharAnalyzer
+
+**Concepts Tested:**
+- Pointers and Arrays
+- Const correctness
+- Iterating through arrays using pointers
+
+**Problem Statement:**
+Implement a utility class `CharAnalyzer` for analyzing characteristics of a C-style string (a zero-terminated array of characters). The class should provide functionalities to count occurrences of a specific character and check if the string is a palindrome. Note that the class should operate on `const char*`, ensuring that the string is not modified.
+
+1. **Class Definition:** Define a class `CharAnalyzer` with a private member `const char* str`, which points to a C-style string.
+
+2. **Constructor:** Implement a constructor for `CharAnalyzer` that takes a `const char*` and initializes the `str` member. The constructor should also ensure that `str` does not point to `nullptr`. If it does, handle it appropriately (e.g., throw an exception).
+
+3. **Character Counting:** Implement a member function `int countChar(char ch)` that counts and returns the number of occurrences of `ch` in the string pointed to by `str`. Iterate through the string using pointers.
+
+4. **Palindrome Check:** Implement a const member function `bool isPalindrome()` that returns `true` if the string is a palindrome, and `false` otherwise. A palindrome is a string that reads the same backward as forward. Ensure that you check for palindromes in an efficient manner, considering the symmetry of the problem.
+
+**Technical Requirements:**
+- In `countChar`, ensure efficient traversal of the string using pointers.
+- In `isPalindrome`, avoid unnecessary comparisons or iterations.
+- Handle the `nullptr` case in the constructor by throwing an exception or asserting.
+
+**Example Usage:**
+
+```cpp
+const char* sampleStr = "level";
+CharAnalyzer analyzer(sampleStr);
+
+std::cout << analyzer.countChar('e') << '\n'; // Outputs 2
+std::cout << std::boolalpha << analyzer.isPalindrome() << '\n'; // Outputs true
+```
+
+**Note:** You are required to implement the `CharAnalyzer` class and the specified member functions. This problem tests your understanding of pointers, arrays, and const correctness in C++. The operations should not modify the original string.
