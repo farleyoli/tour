@@ -278,7 +278,7 @@ std::cout << std::boolalpha << analyzer.isPalindrome() << '\n'; // Outputs true
 
 **Note:** You are required to implement the `CharAnalyzer` class and the specified member functions. This problem tests your understanding of pointers, arrays, and const correctness in C++. The operations should not modify the original string.
 
-# Problem B: Custom Control Flow and Input Handling
+# Problem F: Custom Control Flow and Input Handling
 
 **Concepts Tested:**
 - Control Structures (if-statements, switch-statements)
@@ -293,7 +293,7 @@ Design and implement a console-based menu system for a settings configuration of
     - Define a class `Settings` with a private member that is a `std::map<char, bool>` to hold setting states keyed by single characters.
     - Implement member functions:
         - `void toggleSetting(char setting)`: This function should toggle the boolean value of the given setting. If the setting does not exist, it should be added with a default value of `true`.
-        - `bool getSetting(char setting) const`: This function should return the current state of the given setting. If the setting does not exist, return `false`.
+        - `bool getSetting(char setting)`: This function should return the current state of the given setting. If the setting does not exist, return `false`.
 
 2. **Menu System Implementation:**
     - Implement a function `void settingsMenu(Settings& settings)` to handle user interactions.
@@ -319,7 +319,7 @@ Settings appSettings;
 settingsMenu(appSettings);  // Runs the menu loop
 
 // Inside the menu, the user can:
-// - Input 'A' (or any other letter but 'd' and 'q') to toggle the 'a' setting (case-insensitivity)
+// - Input 'A'/'a' (or any other letter but 'd' and 'q') to toggle the 'a' setting (case-insensitivity)
 // - Input 'd' to display all settings and their states
 // - Input 'q' to quit the menu
 ```
