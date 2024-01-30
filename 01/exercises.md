@@ -277,3 +277,51 @@ std::cout << std::boolalpha << analyzer.isPalindrome() << '\n'; // Outputs true
 ```
 
 **Note:** You are required to implement the `CharAnalyzer` class and the specified member functions. This problem tests your understanding of pointers, arrays, and const correctness in C++. The operations should not modify the original string.
+
+# Problem B: Custom Control Flow and Input Handling
+
+**Concepts Tested:**
+- Control Structures (if-statements, switch-statements)
+- Loops (while-loops, for-loops)
+- Standard Input and Output
+- Data Validation and Error Handling
+
+**Problem Statement:**
+Design and implement a console-based menu system for a settings configuration of a hypothetical software. The system should allow users to view and modify settings through a series of inputs. Each setting is represented by a single character and can be toggled between `true` and `false`.
+
+1. **Settings Representation:** 
+    - Define a class `Settings` with a private member that is a `std::map<char, bool>` to hold setting states keyed by single characters.
+    - Implement member functions:
+        - `void toggleSetting(char setting)`: This function should toggle the boolean value of the given setting. If the setting does not exist, it should be added with a default value of `true`.
+        - `bool getSetting(char setting) const`: This function should return the current state of the given setting. If the setting does not exist, return `false`.
+
+2. **Menu System Implementation:**
+    - Implement a function `void settingsMenu(Settings& settings)` to handle user interactions.
+    - The menu should present the user with options to:
+        - Toggle settings by entering the corresponding character.
+        - Display the current state of all settings.
+        - Exit the menu.
+
+3. **Input Handling and Validation:**
+    - Ensure that the menu continues to prompt the user until they choose to exit.
+    - Use a switch-statement to handle the different input options.
+    - Provide feedback for invalid inputs.
+    - Implement the exit functionality using a specific character input (e.g., 'q' for quit).
+
+**Technical Requirements:**
+- Use control structures effectively to handle different stages of the menu (reading input, processing commands, etc.).
+- Ensure proper error handling for invalid inputs.
+- The settings should be case-insensitive (e.g., 'A' and 'a' refer to the same setting).
+
+**Example Usage:**
+```cpp
+Settings appSettings;
+settingsMenu(appSettings);  // Runs the menu loop
+
+// Inside the menu, the user can:
+// - Input 'A' (or any other letter but 'd' and 'q') to toggle the 'a' setting (case-insensitivity)
+// - Input 'd' to display all settings and their states
+// - Input 'q' to quit the menu
+```
+
+**Note:** You need to define the `Settings` class, implement the required member functions, and create the `settingsMenu` function to handle user interactions as per the specifications. This problem requires understanding of control structures, class design, standard input/output, and basic error handling in C++.
