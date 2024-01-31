@@ -325,3 +325,50 @@ settingsMenu(appSettings);  // Runs the menu loop
 ```
 
 **Note:** You need to define the `Settings` class, implement the required member functions, and create the `settingsMenu` function to handle user interactions as per the specifications. This problem requires understanding of control structures, class design, standard input/output, and basic error handling in C++.
+
+# Problem G: Memory Inspector Utility
+
+**Concepts Tested:**
+- Pointer operations
+- Reference operations
+- Understanding of memory addresses
+- Assignment vs. Initialization
+
+**Problem Statement:**
+Design and implement a utility named `MemoryInspector` that allows a user to inspect and manipulate memory locations of variables. The utility should demonstrate the handling of pointers, references, assignment, and initialization, reflecting a deep understanding of low-level memory operations.
+
+1. **Memory Display Functionality:**
+   - Implement a function `void displayMemoryAddress(int& variable)` that takes an integer reference, displays its value, and its memory address.
+   - Overload `displayMemoryAddress` to also accept and handle pointers, displaying the memory address the pointer is pointing to, and the value stored at that address.
+
+2. **Memory Modification Functionality:**
+   - Implement a function `void modifyValue(int& variable, int newValue)` that takes an integer reference and a new integer value. The function should assign the new value to the referenced variable and display the old and new values of the variable.
+   - Implement another function `void modifyValueThroughPointer(int* variablePtr, int newValue)` that takes an integer pointer, changes the value it points to, and displays the old and new values of the pointed-to variable.
+
+3. **Assignment vs. Initialization Demonstration:**
+   - In the main function, demonstrate the distinction between assignment and initialization using pointers and references. Use proper code comments to explain each operation, especially focusing on how assignment to a pointer changes the address it holds, while assignment to a reference changes the value of the referenced variable, not the binding of the reference.
+
+**Technical Requirements:**
+- `displayMemoryAddress` should properly handle both references and pointers.
+- `modifyValue` and `modifyValueThroughPointer` should ensure the integrity of the operation is displayed (i.e., showing the value before and after the modification).
+- Properly document the behavior of assignment vs. initialization, and how these concepts apply differently to pointers and references.
+
+**Example Usage:**
+```cpp
+int main() {
+    int x = 10;
+    int y = 20;
+    int* ptrX = &x;
+
+    MemoryInspector::displayMemoryAddress(x);
+    MemoryInspector::displayMemoryAddress(ptrX); 
+    
+    MemoryInspector::modifyValue(x, 15);
+    MemoryInspector::modifyValueThroughPointer(&y, 25); 
+    
+    // Demonstration of Assignment vs Initialization
+    // ... (your demonstration here with appropriate comments)
+}
+```
+
+**Note:** The `MemoryInspector` utility should encapsulate the functionality to display and modify memory, showcasing a deep understanding of pointers, references, assignment, and initialization. Be meticulous in handling these low-level concepts to ensure the utility is robust and informative.

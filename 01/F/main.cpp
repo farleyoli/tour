@@ -24,7 +24,7 @@ public:
         for (const auto& pair : states) {
             char key = pair.first;
             bool state = pair.second;
-            cout << "Key " << key << " has value " << noboolalpha << state << endl;
+            cout << "Key " << key << " has value " << boolalpha << state << endl;
         }
     }
 private:
