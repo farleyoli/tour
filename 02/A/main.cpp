@@ -57,7 +57,7 @@ int main() {
 
     printVector(v); 
     
-    cout << "Sum of vector elements: " << vectorSum(v) << endl; // Output: 15.0
+    cout << "Sum of vector elements: " << vectorSum(v) << endl;
     vectorFree(v);
     printVector(v);
 }
