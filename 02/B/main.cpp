@@ -82,7 +82,7 @@ private:
     bool isValidDate(const string& date) {
         if(count(date.begin(), date.end(), '-') != 2)
             return false;
-        int days[] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+        int days_per_month[] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
         stringstream ss(date);
 
         string year;
@@ -91,14 +91,14 @@ private:
             return false;
         year_cache = stoi(year);
         if (isLeapYear(year_cache))
-            days[1]++;
+            days_per_month[1]++;
 
         string day;
         getline(ss, day, '-');
         if (!isOnlyDigits(day) || day.size() != 2)
             return false;
         day_cache = stoi(day);
-        if (day_cache < 0 || day_cache > days[month_cache])
+        if (day_cache < 0)
             return false;
 
         string month;
@@ -107,6 +107,9 @@ private:
             return false;
         month_cache = stoi(month);
         if (month_cache < 1 || month_cache > 12)
+            return false;
+
+        if(day_cache > days_per_month[month_cache])
             return false;
 
         return true;
@@ -121,9 +124,9 @@ int main() {
     assert(dt.addDate("223-12-12")); // Valid date
     assert(dt.addDate("2022-02-02")); // Valid date
     assert(dt.addDate("223-11-12")); // Valid date
+    assert(!dt.addDate("2023-02-30")); // Invalid date, should return false or handle appropriately
     assert(dt.addDate("2020-02-02")); // Valid date
     assert(!dt.addDate("223-12-12")); // Overcapacity
-    assert(!dt.addDate("2023-02-30")); // Invalid date, should return false or handle appropriately
 
     // Accessing dates
     for (int i = 0; i < dt.size(); ++i) {

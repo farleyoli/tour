@@ -97,3 +97,58 @@ int main() {
 }
 ```
 In this problem, the focus shifts to managing a dynamic list of dates, ensuring proper class design, and handling basic dynamic memory without involving complex data structures like matrices or advanced memory management techniques.
+
+# Problem C: Smart Traffic Control System
+
+**Concepts Tested:**
+- Enum classes
+- Operator overloading
+- Scope resolution
+- Explicit type conversion
+
+**Problem Statement:**
+Implement a namespace named `SmartTrafficControl` that encapsulates the functionality of a traffic control system using `enum class` for traffic lights and pedestrian signals. The system should change the state of traffic lights and pedestrian signals based on the current state, demonstrating an understanding of `enum class` properties, operator overloading, and explicit type conversions.
+
+1. **Traffic Light and Pedestrian Signal Enums:**
+   - Inside the `SmartTrafficControl` namespace, define an `enum class TrafficLight { green, yellow, red };` to represent the state of a traffic light.
+   - Inside the `SmartTrafficControl` namespace, define an `enum class PedestrianSignal { walk, wait };` to represent the state of pedestrian signals.
+
+2. **State Transition Functionality:**
+   - Implement a function `void changeTrafficLightState(TrafficLight& light)` within the namespace that changes the state of the traffic light to the next logical state in the order green -> yellow -> red -> green.
+   - Implement a function `void changePedestrianSignalState(PedestrianSignal& signal)` within the namespace that toggles the state of the pedestrian signal between walk and wait.
+
+3. **Synchronization Logic:**
+   - Ensure that the traffic light and pedestrian signals are synchronized. When the traffic light is green or yellow, the pedestrian signal should be wait. When the traffic light is red, the pedestrian signal should be walk.
+   - Implement a function `void synchronizeSignals(const TrafficLight& light, PedestrianSignal& signal)` within the namespace that updates the pedestrian signal based on the traffic light's current state.
+
+4. **Display Functionality:**
+   - Implement a function `void displayStates(const TrafficLight& light, const PedestrianSignal& signal)` within the namespace that prints the current state of the traffic light and the pedestrian signal.
+
+**Technical Requirements:**
+- `changeTrafficLightState` and `changePedestrianSignalState` should handle state transitions correctly.
+- `synchronizeSignals` should ensure the integrity of the traffic system by properly synchronizing the traffic light and pedestrian signal.
+- Use explicit type conversion where necessary, especially when displaying the state of signals.
+- Properly manage scope resolution and avoid implicit conversions between `enum class` values and integers.
+
+**Example Usage:**
+```cpp
+namespace SmartTrafficControl {
+    // Enum definitions
+    // Function declarations
+}
+
+int main() {
+    SmartTrafficControl::TrafficLight trafficLight = SmartTrafficControl::TrafficLight::green;
+    SmartTrafficControl::PedestrianSignal pedestrianSignal = SmartTrafficControl::PedestrianSignal::wait;
+
+    SmartTrafficControl::displayStates(trafficLight, pedestrianSignal);
+
+    SmartTrafficControl::changeTrafficLightState(trafficLight);
+    SmartTrafficControl::synchronizeSignals(trafficLight, pedestrianSignal);
+    SmartTrafficControl::displayStates(trafficLight, pedestrianSignal);
+
+    // More state changes and synchronization...
+}
+```
+
+In this setup, `SmartTrafficControl` is a well-organized namespace containing all related functions and enum classes, providing a clear and structured approach to managing traffic light and pedestrian signal states.
