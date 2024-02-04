@@ -152,3 +152,72 @@ int main() {
 ```
 
 In this setup, `SmartTrafficControl` is a well-organized namespace containing all related functions and enum classes, providing a clear and structured approach to managing traffic light and pedestrian signal states.
+
+# Problem D: Union-Based Configuration Manager
+
+**Concepts Tested:**
+- Union and structure integration
+- Enumerations and type tracking
+- Proper memory management
+- Class encapsulation and abstraction
+
+**Problem Statement:**
+Design and implement a class named `ConfigManager` that utilizes a union to store one of several types of configuration values. These values could be integer (`int`), floating-point (`float`), or a C-style string (`char*`). Use an enumeration to track the type of value currently stored in the union. Ensure that the class properly manages memory, especially for the C-style string, and encapsulates the union to prevent misuse.
+
+1. **Configuration Union and Type Tracking:**
+   - Define a union `ConfigValue` that can hold an `int`, a `float`, or a `char*`.
+   - Create an enumeration `ConfigType` with values `INT`, `FLOAT`, and `STRING` to track what type of data is currently stored in the union.
+   - Define a structure `ConfigEntry` that contains a `string` to hold the name of the configuration, a `ConfigType` to hold the type of the configuration, and a `ConfigValue` union.
+
+2. **Class Implementation:**
+   - Implement the `ConfigManager` class.
+   - It should have a private member of type `std::vector<ConfigEntry>` to store multiple configurations.
+   - Implement member functions:
+     - `void addConfig(const std::string& name, int value)`
+     - `void addConfig(const std::string& name, float value)`
+     - `void addConfig(const std::string& name, const char* value)`
+     - Ensure proper memory management, especially for the `char*` strings (consider deep copying).
+   
+3. **Value Retrieval and Memory Management:**
+   - Implement member functions to retrieve values:
+     - `bool getConfigValue(const std::string& name, int& outValue)`
+     - `bool getConfigValue(const std::string& name, float& outValue)`
+     - `bool getConfigValue(const std::string& name, char* &outValue)` (allocate memory for the `outValue` and copy the string into it)
+   - Implement a destructor to properly deallocate any memory allocated for the C-style strings in the union.
+
+4. **Type Safety and Error Handling:**
+   - Ensure that each `getConfigValue` function checks the type of the config entry before attempting to return it. If the types do not match, or if the config name does not exist, the function should return `false`.
+
+**Technical Requirements:**
+- `ConfigManager` should properly encapsulate the union and manage memory for `char*` strings.
+- `addConfig` and `getConfigValue` functions should handle different data types correctly and safely.
+- Ensure that the `ConfigManager` destructor properly deallocates memory to prevent memory leaks.
+
+**Example Usage:**
+```cpp
+int main() {
+    ConfigManager cm;
+    cm.addConfig("max_connections", 100);
+    cm.addConfig("timeout", 52.5f);
+    cm.addConfig("hostname", "example.com");
+    
+    int maxConnections;
+    float timeout;
+    char* hostname = nullptr;
+    
+    if (cm.getConfigValue("max_connections", maxConnections)) {
+        std::cout << "Max Connections: " << maxConnections << std::endl;
+    }
+    
+    if (cm.getConfigValue("timeout", timeout)) {
+        std::cout << "Timeout: " << timeout << std::endl;
+    }
+    
+    if (cm.getConfigValue("hostname", hostname)) {
+        std::cout << "Hostname: " << hostname << std::endl;
+        delete[] hostname; // Deallocate memory allocated by getConfigValue
+    }
+}
+```
+
+In this problem, students are required to demonstrate their understanding of unions, enums, and class encapsulation while also ensuring proper memory management, particularly with raw pointers for strings.
