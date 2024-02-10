@@ -48,3 +48,40 @@ int main() {
 **Note:**
 - Ensure proper use of header files and separate source files for class definition and implementation.
 - This problem focuses on traditional C++ project structure, encapsulation of vector operations within a class, and the separation of declaration and implementation, aligning with your current level of understanding and the common support of compilers.
+
+# Problem B: Namespace Management Utility
+
+**Concepts Tested:**
+- Understanding and usage of namespaces
+- Function declaration and definition within namespaces
+- Use of `using` declarations and directives
+
+**Problem Statement:**
+Create a namespace management utility that demonstrates the use of custom namespaces, interaction between different namespaces, and the use of `using` declarations and directives to manage scope and visibility of names. 
+
+1. **Namespace Declaration and Function Implementation:**
+   - Define a namespace named `UtilityFunctions`. Inside it, declare and define a function `void displayMessage()` that prints "Utility Function Message: Hello World!".
+   - Define another namespace named `AdvancedMath`. Inside it, declare and define a function `double computeCircleArea(double radius)` that returns the area of a circle given the radius. Use the constant `pi` (3.14159) for calculations.
+
+2. **Namespace Interaction and `using` Declaration:**
+   - Define a third namespace named `MathApplication`. Inside it, create a function `void performComputation(double radius)` that computes the area of a circle by calling `AdvancedMath::computeCircleArea(radius)` and prints the result. 
+   - Within `MathApplication`, use a `using` declaration to bring `displayMessage` from `UtilityFunctions` directly into scope, and call it at the beginning of `performComputation`.
+
+3. **Global Scope Function with `using` Directive:**
+   - In the global scope, declare and define a function `void runApp()`. Inside this function, use a `using` directive for `MathApplication` namespace and call `performComputation` with a radius of 5.0.
+   - Ensure that `runApp` also calls `UtilityFunctions::displayMessage` directly, demonstrating the difference in name visibility due to the `using` directive.
+
+**Technical Requirements:**
+- Ensure that `computeCircleArea` uses the correct formula for calculating the area of a circle (\(Area = \pi \times radius^2\)).
+- The `using` declaration in `MathApplication` should only apply to `displayMessage`, not to any other function from `UtilityFunctions`.
+- The `using` directive in `runApp` should demonstrate how all members of `MathApplication` become accessible without namespace qualification.
+
+**Example Usage:**
+```cpp
+int main() {
+    runApp();  // This should display the message from UtilityFunctions and the computed area of the circle.
+    // Output should be:
+    // Utility Function Message: Hello World!
+    // Circle Area: 78.53975
+}
+```
