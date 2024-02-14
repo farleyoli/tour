@@ -79,9 +79,56 @@ Create a namespace management utility that demonstrates the use of custom namesp
 **Example Usage:**
 ```cpp
 int main() {
-    runApp();  // This should display the message from UtilityFunctions and the computed area of the circle.
-    // Output should be:
-    // Utility Function Message: Hello World!
-    // Circle Area: 78.53975
+    runApp();
+}
+```
+
+# Problem C: Vector Transformation Utility
+
+**Concepts Tested:**
+- Function arguments and return values
+- Use of STL containers (std::vector)
+- Passing arguments by const-reference
+- Returning objects from functions
+- Structured binding (C++17)
+
+**Problem Statement:**
+Design and implement a utility named `VectorTransformation` that performs various transformations on a vector of integers and returns the results in a structured manner. This utility will showcase understanding of efficient argument passing, use of STL containers, and modern C++ features like structured binding.
+
+1. **Sum and Product Calculation:**
+   - Implement a function `std::pair<int, int> calculateSumAndProduct(const std::vector<int>& vec)` that calculates both the sum and the product of all elements in the provided vector. The function should return these two values as a `std::pair`, with the sum as the first element and the product as the second.
+
+2. **Filtered Copy:**
+   - Implement a function `std::vector<int> copyIfGreaterThan(const std::vector<int>& vec, int threshold)` that returns a new vector containing only the elements of `vec` that are greater than a specified `threshold` value. This demonstrates passing large objects efficiently and returning by value.
+
+3. **Modification by Reference:**
+   - Implement a function `void incrementAllBy(std::vector<int>& vec, int increment)` that increments all elements of the vector `vec` by a given `increment` value. This function should modify the vector in place.
+
+4. **Demonstrate Structured Binding (Corrected):**
+   - In a function `void demonstrateStructuredBinding(const std::vector<int>& vec)`, use the `calculateSumAndProduct` function to get the sum and product of the provided vector `vec`, and then print these values using structured binding. This demonstrates the use of structured binding with functions returning multiple values.
+
+**Technical Requirements:**
+- `calculateSumAndProduct` should use a single loop to calculate both the sum and the product to ensure efficiency.
+- `copyIfGreaterThan` should demonstrate understanding of STL containers and efficient object return mechanisms.
+- `incrementAllBy` should modify the input vector in place, demonstrating the use of non-const references.
+- Use structured binding in `demonstrateStructuredBinding` to unpack the returned pair from `calculateSumAndProduct`.
+
+**Example Usage:**
+```cpp
+int main() {
+    std::vector<int> vec = {1, 2, 3, 4, 5};
+    VectorTransformation::demonstrateStructuredBinding(vec);
+
+    auto filtered = VectorTransformation::copyIfGreaterThan(vec, 2);
+    for (int val : filtered) {
+        std::cout << val << " ";
+    }
+    std::cout << std::endl;
+
+    VectorTransformation::incrementAllBy(vec, 5);
+    for (int val : vec) {
+        std::cout << val << " ";
+    }
+    std::cout << std::endl;
 }
 ```
