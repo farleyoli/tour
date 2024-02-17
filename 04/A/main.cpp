@@ -35,7 +35,7 @@ public:
     int& operator[](int j) {
         if (j < 0 || j >= i)
             throw IndexOutOfBoundsException(j, i, "");
-        return arr[i];
+        return arr[j];
     }
 private:
     int i = 0;
