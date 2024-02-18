@@ -43,3 +43,109 @@ int main() {
 }
 ```
 This problem focuses on ensuring you can apply exception handling to manage errors in a controlled manner, specifically within the context of array operations, without the added complexity of templates.
+
+# Problem B: File Logger with Exception Handling
+
+**Concepts Tested:**
+- File I/O
+- Custom Exception Classes
+- Constructors, Destructors, and Resource Management
+- Class Invariants and Preconditions
+
+**Problem Statement:**
+Design and implement a `FileLogger` class that provides a robust logging utility, writing messages to a file. This class should ensure safety and correctness by managing file resources properly and enforcing class invariants, especially in scenarios involving file access and operations. Your implementation must demonstrate proficient use of file I/O, exception handling, and resource management within a realistic application context.
+
+1. **FileLogger Class Definition:**
+   - Define a class `FileLogger` that encapsulates file operations for logging messages.
+   - Include necessary private members, such as a `std::ofstream` for the file stream and a `std::string` for the file name.
+
+2. **Constructor with File Opening:**
+   - Implement a constructor `FileLogger(const std::string& fileName)` that attempts to open the file specified by `fileName` for writing. Use constructor initialization lists where appropriate.
+   - The constructor must throw a custom exception `FileOpenException` if it fails to open the file, ensuring the class invariant that a valid, open file stream is maintained.
+
+3. **Destructor for File Closure:**
+   - Implement a destructor that ensures the file stream is properly closed, preventing resource leaks.
+
+4. **Custom Exception Classes:**
+   - Define a custom exception class `FileOpenException` to report failures in opening the file.
+   - Optionally, define another custom exception class `WriteException` to report failures in writing to the file.
+
+5. **Logging Functionality with Exception Handling:**
+   - Implement a member function `void log(const std::string& message)` that writes `message` to the file, followed by a newline character. This function must ensure that the write operation succeeds and throw `WriteException` if it fails.
+
+6. **Demonstration of Resource Management and Exception Handling:**
+   - Show how your class handles scenarios where file operations could lead to exceptions being thrown, such as during construction or logging, and demonstrate the safe release of resources.
+
+**Technical Requirements:**
+- The constructor must validate its arguments and manage file resources correctly, using exceptions to handle errors.
+- Implement proper resource management to ensure file streams are correctly managed.
+- Use custom exceptions to provide meaningful error handling and reporting.
+- Ensure the class adheres to its invariants by validating preconditions and maintaining consistent states.
+
+**Example Usage:**
+```cpp
+int main() {
+    try {
+        FileLogger logger("log.txt");
+        logger.log("Application started");
+        // Additional logging
+    } catch (const FileOpenException& e) {
+        std::cerr << "Failed to open log file: " << e.what() << '\n';
+    } catch (const WriteException& e) {
+        std::cerr << "Failed to write to log file: " << e.what() << '\n';
+    }
+}
+```
+This problem emphasizes practical application of class design principles, focusing on resource management, exception handling, and the enforcement of class invariants, reflecting a realistic use case in software development with C++.
+
+# Problem C: Network Connection Simulator
+
+**Concepts Tested:**
+- Exception handling
+- Simulating external resource management
+- Use of error codes for expected failures
+- Use of `noexcept`
+
+**Problem Statement:**
+Design and implement a class named `NetworkConnectionSimulator` that simulates basic network operations and error handling mechanisms in C++, focusing on exception handling, error codes, and unrecoverable errors simulation. Error should be simulated with random number generators.
+
+1. **Connection Establishment:**
+   - Implement a function `bool connect(const std::string& address)` that attempts to establish a connection to a given network address. This function should return a boolean indicating success (`true`) or failure (`false`) instead of throwing an exception, as connection failures are considered normal and expected errors that the immediate caller can handle.
+
+2. **Data Transmission:**
+   - Implement a function `void sendData(const std::string& data)` that simulates sending data over the established connection. If the connection is not established or if sending fails in a way that cannot be immediately handled, this function should throw an exception.
+
+3. **Data Reception:**
+   - Implement a function `std::string receiveData()` that simulates receiving data over the network connection. If the connection is not established or if receiving fails in an unexpected way, this function should throw an exception.
+
+4. **Forced Disconnection and Termination:**
+   - Implement a function `void forceDisconnect()` marked with `noexcept`. This function simulates a critical failure that leads to forced disconnection. If an exception is thrown within this function, the program should terminate. Use this function to demonstrate handling of errors that are considered unrecoverable within the context of your simulation.
+
+**Technical Requirements:**
+- `connect` should use error codes (returning `true` or `false`) to communicate failure instead of exceptions, as connection failures are expected and should be handled by the caller.
+- `sendData` and `receiveData` should throw exceptions for errors that cannot be handled locally, as these represent unexpected failures that the immediate caller is likely not equipped to handle.
+- `forceDisconnect` with `noexcept` should be used to simulate handling of unrecoverable errors, leading to program termination if an error occurs within.
+
+**Example Usage:**
+```cpp
+int main() {
+    NetworkConnectionSimulator simulator;
+
+    // Attempt to connect, handle failure with error code
+    if (!simulator.connect("http://example.com")) {
+        std::cerr << "Failed to establish a connection." << std::endl;
+        return -1;
+    }
+
+    try {
+        simulator.sendData("Hello, World!");
+        std::string response = simulator.receiveData();
+        std::cout << "Received response: " << response << std::endl;
+    } catch (const std::exception& e) {
+        std::cerr << "An error occurred during data transmission: " << e.what() << std::endl;
+    }
+
+    // Demonstrate noexcept function
+    simulator.forceDisconnect(); // This should be designed to show how terminate is called on errors
+}
+```
