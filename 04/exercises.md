@@ -149,3 +149,62 @@ int main() {
     simulator.forceDisconnect(); // This should be designed to show how terminate is called on errors
 }
 ```
+
+# Problem D: Customized Assert Library
+
+**Concepts Tested:**
+- Function overloading
+- Pointer operations
+- Control flow with exceptions
+- Custom error handling
+
+**Problem Statement:**
+Expand the provided basic assertion utility into a more robust and versatile assertion library named `CustomAssert`. Your implementation should demonstrate advanced C++ features such as function overloading, exception handling, and pointer safety. The goal is to provide a tool that aids in debugging and validating program correctness under various conditions.
+
+1. **Enhanced Assertion with Exception Throwing:**
+   - Implement a function `void assertOrThrow(bool condition, const std::string& errorMessage)` that checks a condition; if the condition is `false`, it throws a custom exception `AssertionFailedException` with the provided error message.
+   - The `AssertionFailedException` should be a custom exception class derived from `std::exception` and must override the `what()` method to return the error message.
+
+2. **Null Pointer Assertion:**
+   - Implement a template function `void assertNotNull(T* ptr, const std::string& errorMessage)` that checks if a given pointer is not `nullptr`. If the pointer is `nullptr`, it throws an `AssertionFailedException` with the provided error message.
+   - This function should be usable with pointers to any type (e.g., `int*`, `double*`, `SomeClass*`).
+
+3. **Equality Assertion with Custom Error Messages:**
+   - Implement a template function `void assertEquals(T expected, T actual, const std::string& errorMessage)` that checks if two provided values are equal. If not, it throws an `AssertionFailedException` with the provided error message.
+   - This function should work with any type that supports the `==` operator, providing flexibility in comparing values of basic data types or objects.
+
+**Technical Requirements:**
+- `assertOrThrow` must correctly identify failing conditions and throw exceptions accordingly.
+- `assertNotNull` should provide a clear mechanism for pointer safety checks, throwing exceptions for null pointers.
+- `assertEquals` should facilitate easy comparison of expected vs. actual values, enhancing test reliability.
+- Custom exception `AssertionFailedException` must be properly defined and utilized in all relevant functions.
+
+**Example Usage:**
+```cpp
+class SomeClass {
+    // SomeClass definition
+};
+
+int main() {
+    CustomAssert::assertOrThrow(true, "This should pass without an exception.");
+
+    int x = 10;
+    CustomAssert::assertNotNull(&x, "x should not be nullptr.");
+
+    SomeClass* obj = new SomeClass();
+    CustomAssert::assertNotNull(obj, "obj should not be nullptr.");
+
+    CustomAssert::assertEquals(10, x, "x should be equal to 10.");
+    
+    try {
+        CustomAssert::assertOrThrow(false, "This should throw an exception.");
+    } catch (const AssertionFailedException& e) {
+        std::cout << e.what() << std::endl;
+    }
+
+    // Ensure proper cleanup
+    delete obj;
+}
+```
+
+This problem challenges you to implement a feature-rich assertion library that can significantly aid in developing robust C++ applications by providing detailed feedback on failure conditions.
